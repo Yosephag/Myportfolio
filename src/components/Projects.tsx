@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Github } from 'lucide-react';
 import axios from 'axios';
-
+import portfolioImage from "../assets/portfolio.png";
 // Local Garage project image
 import garageImage from '../assets/Garage.jpg';
 
@@ -39,7 +39,7 @@ const Projects: React.FC = () => {
       description:
         'B.Sc. Thesis Project. An intelligent healthcare platform combining medical appointment scheduling with an ML-based triage classifier. Assesses patient symptoms to recommend triage severity levels and schedule clinics appropriately.',
       technologies:
-        'React, Python, Machine Learning, PostgreSQL, Flask, Tailwind CSS',
+        'React, Node.js,Express, MySQL,Python, Flask, Tailwind CSS',
       githubLink:
         'https://github.com/AbebeNega1/intelligent-triage-system/tree/feature/yosef-version',
 
@@ -51,15 +51,15 @@ const Projects: React.FC = () => {
     {
       title: 'Personal Portfolio',
       description:
-        'A fully responsive, modern web application detailing my academic achievements, engineering projects, and certifications. Admin portal manages live project items, database message logs, and certificate listings.',
+        'A fully responsive and modern personal portfolio website showcasing my academic achievements, engineering projects, technical skills, certifications, and professional experience, with an interactive contact section.',
       technologies:
-        'React, TypeScript, Tailwind CSS, Express, Prisma ORM, PostgreSQL',
+        'React, TypeScript, Tailwind CSS, Express,',
       githubLink:
         'https://github.com/Yosephag/Myportfolio?utm_source=chatgpt.com',
 
       // Unsplash image
       image:
-        'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800',
+portfolioImage
     },
   ];
 
