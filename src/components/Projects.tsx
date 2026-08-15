@@ -55,7 +55,7 @@ const Projects: React.FC = () => {
       technologies:
         'React, TypeScript, Tailwind CSS, Express, Prisma ORM, PostgreSQL',
       githubLink:
-        'https://github.com/yoseph/myportfolio',
+        'https://github.com/Yosephag/Myportfolio?utm_source=chatgpt.com',
 
       // Unsplash image
       image:
