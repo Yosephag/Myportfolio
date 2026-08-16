@@ -10,28 +10,15 @@ import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
 const Home: React.FC = () => {
-  const scrollToSection = (id: string): void => {
-    const element = document.getElementById(id);
-
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
   return (
     <div className="relative min-h-screen bg-dark-bg text-gray-100 selection:bg-brand-blue/30 selection:text-white">
-      {/* Navbar */}
+      {/* Navigation */}
       <Navbar />
 
-      {/* Hero */}
-      <Hero
-        onContactClick={() => scrollToSection("contact")}
-      />
+      {/* Hero Section */}
+      <Hero />
 
-      {/* Main Content */}
+      {/* Main Portfolio Sections */}
       <main className="relative z-10">
         <About />
         <Skills />
