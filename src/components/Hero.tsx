@@ -3,7 +3,11 @@ import { ArrowRight, Download, Mail, Terminal } from "lucide-react";
 import { motion } from "framer-motion";
 import profile from "../assets/profile.jpg";
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onContactClick?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
   return (
     <section
       id="home"
@@ -79,7 +83,7 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-                            {/* View Projects */}
+              {/* View Projects */}
               <a
                 href="#projects"
                 className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-blue to-brand-purple hover:opacity-95 font-semibold text-white rounded-xl shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/35 transition-all flex items-center justify-center space-x-2 group focus:outline-none"
@@ -101,6 +105,7 @@ const Hero: React.FC = () => {
               {/* Contact */}
               <a
                 href="#contact"
+                onClick={onContactClick}
                 className="w-full sm:w-auto px-8 py-4 bg-transparent border border-brand-purple/30 hover:border-brand-purple/50 font-semibold text-brand-purple hover:text-brand-purple-light rounded-xl transition-all flex items-center justify-center space-x-2 focus:outline-none"
               >
                 <Mail className="w-4 h-4" />
@@ -110,24 +115,21 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Right Side Profile Image */}
-<div className="flex justify-center lg:justify-end">
-  <div className="relative w-72 h-72 md:w-96 md:h-96">
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative w-72 h-72 md:w-96 md:h-96">
+              {/* Glow Effect */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-brand-blue to-brand-purple blur-3xl opacity-30"></div>
 
-    {/* Glow Effect */}
-    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-brand-blue to-brand-purple blur-3xl opacity-30"></div>
-
-    {/* Circular Frame */}
-    <div className="relative w-full h-full rounded-full border-4 border-brand-blue overflow-hidden bg-gray-900 shadow-2xl shadow-brand-blue/30">
-
-      <img
-        src={profile}
-        alt="Yoseph Agimasie"
-        className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
-      />
-
-    </div>
-  </div>
-</div>
+              {/* Circular Frame */}
+              <div className="relative w-full h-full rounded-full border-4 border-brand-blue overflow-hidden bg-gray-900 shadow-2xl shadow-brand-blue/30">
+                <img
+                  src={profile}
+                  alt="Yoseph Agimasie"
+                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
