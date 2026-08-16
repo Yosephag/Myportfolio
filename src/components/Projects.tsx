@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Github } from 'lucide-react';
-import axios from 'axios';
-import portfolioImage from "../assets/portfolio.png";
-// Local Garage project image
+
+import portfolioImage from '../assets/portfolio.png';
 import garageImage from '../assets/Garage.jpg';
 
 // Project interface
@@ -16,11 +15,10 @@ interface Project {
 }
 
 const Projects: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const fallbackProjects: Project[] = [
+  // Static frontend project data
+  const projects: Project[] = [
     {
+      id: 1,
       title: 'Garage Website',
       description:
         'A responsive automotive garage website allowing customers to book repair services, view progress, and purchase car components. Admin features include service scheduling, inventory management, and invoice generation.',
@@ -28,72 +26,35 @@ const Projects: React.FC = () => {
         'React, Node.js, Express, MySQL, Tailwind CSS',
       githubLink:
         'https://github.com/Yosephag/AAGY-Sgaragemainapp',
-
-      // Local Garage.jpg image
       image: garageImage,
     },
 
     {
+      id: 2,
       title:
         'Web-Based Intelligent Patient Appointment and Triage System',
       description:
         'B.Sc. Thesis Project. An intelligent healthcare platform combining medical appointment scheduling with an ML-based triage classifier. Assesses patient symptoms to recommend triage severity levels and schedule clinics appropriately.',
       technologies:
-        'React, Node.js,Express, MySQL,Python, Flask, Tailwind CSS',
+        'React, Node.js, Express, MySQL, Python, Flask, Tailwind CSS',
       githubLink:
         'https://github.com/AbebeNega1/intelligent-triage-system/tree/feature/yosef-version',
-
-      // Unsplash image
       image:
         'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800',
     },
 
     {
+      id: 3,
       title: 'Personal Portfolio',
       description:
         'A fully responsive and modern personal portfolio website showcasing my academic achievements, engineering projects, technical skills, certifications, and professional experience, with an interactive contact section.',
       technologies:
-        'React, TypeScript, Tailwind CSS, Express,',
+        'React, TypeScript, Tailwind CSS',
       githubLink:
-        'https://github.com/Yosephag/Myportfolio?utm_source=chatgpt.com',
-
-      // Unsplash image
-      image:
-portfolioImage
+        'https://github.com/Yosephag/Myportfolio',
+      image: portfolioImage,
     },
   ];
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const API_URL = import.meta.env.VITE_API_URL || '';
-
-        const response = await axios.get(
-          `${API_URL}/api/projects`
-        );
-
-        if (
-          response.data.success &&
-          response.data.data.length > 0
-        ) {
-          setProjects(response.data.data);
-        } else {
-          setProjects(fallbackProjects);
-        }
-      } catch (error) {
-        console.warn(
-          'Could not fetch projects, using fallback static data:',
-          error
-        );
-
-        setProjects(fallbackProjects);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProjects();
-  }, []);
 
   return (
     <section
@@ -121,121 +82,111 @@ portfolioImage
         {/* =========================
             PROJECTS
         ========================== */}
-        {loading ? (
-          <div className="flex justify-center items-center py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-brand-blue"></div>
+          {projects.map((project, idx) => {
 
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            const techTags = project.technologies
+              .split(',')
+              .map((t) => t.trim())
+              .filter((t) => t.length > 0);
 
-            {projects.map((project, idx) => {
+            return (
+              <div
+                key={project.id ?? idx}
+                className="glass-card rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-1.5 transition-all duration-300"
+              >
 
-              const techTags = project.technologies
-                .split(',')
-                .map((t) => t.trim())
-                .filter((t) => t.length > 0);
+                {/* =========================
+                    CARD IMAGE
+                ========================== */}
+                <div className="h-48 overflow-hidden relative group">
 
-              return (
-                <div
-                  key={project.id ?? idx}
-                  className="glass-card rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-1.5 transition-all duration-300"
-                >
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      const image =
+                        e.target as HTMLImageElement;
 
-                  {/* =========================
-                      CARD IMAGE
-                  ========================== */}
-                  <div className="h-48 overflow-hidden relative group">
+                      image.src = garageImage;
+                    }}
+                  />
 
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  {/* Image Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/80 to-transparent pointer-events-none"></div>
 
-                      onError={(e) => {
-                        const image =
-                          e.target as HTMLImageElement;
+                </div>
 
-                        // Use local Garage image as fallback
-                        image.src = garageImage;
-                      }}
-                    />
+                {/* =========================
+                    CARD BODY
+                ========================== */}
+                <div className="p-6 flex-1 flex flex-col justify-between">
 
-                    {/* Image Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/80 to-transparent pointer-events-none"></div>
+                  <div className="space-y-3">
+
+                    {/* Project Title */}
+                    <h3 className="text-lg font-bold text-gray-100 hover:text-brand-blue transition-colors">
+                      {project.title}
+                    </h3>
+
+                    {/* Project Description */}
+                    <p className="text-sm text-gray-400 leading-relaxed line-clamp-4">
+                      {project.description}
+                    </p>
 
                   </div>
 
-                  {/* =========================
-                      CARD BODY
-                  ========================== */}
-                  <div className="p-6 flex-1 flex flex-col justify-between">
+                  <div className="mt-6 space-y-4">
 
-                    <div className="space-y-3">
+                    {/* =========================
+                        TECHNOLOGY TAGS
+                    ========================== */}
+                    <div className="flex flex-wrap gap-1.5">
 
-                      {/* Project Title */}
-                      <h3 className="text-lg font-bold text-gray-100 hover:text-brand-blue transition-colors">
-                        {project.title}
-                      </h3>
-
-                      {/* Project Description */}
-                      <p className="text-sm text-gray-400 leading-relaxed line-clamp-4">
-                        {project.description}
-                      </p>
+                      {techTags.map((tech, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="px-2.5 py-1 text-[10px] font-semibold text-brand-blue bg-brand-blue/5 border border-brand-blue/10 rounded-md"
+                        >
+                          {tech}
+                        </span>
+                      ))}
 
                     </div>
 
-                    <div className="mt-6 space-y-4">
+                    {/* =========================
+                        GITHUB LINK
+                    ========================== */}
+                    <div className="flex items-center space-x-4 pt-2 border-t border-gray-800/40">
 
-                      {/* =========================
-                          TECHNOLOGY TAGS
-                      ========================== */}
-                      <div className="flex flex-wrap gap-1.5">
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-1.5 text-xs text-gray-300 hover:text-white transition-colors"
+                      >
 
-                        {techTags.map((tech, tIdx) => (
-                          <span
-                            key={tIdx}
-                            className="px-2.5 py-1 text-[10px] font-semibold text-brand-blue bg-brand-blue/5 border border-brand-blue/10 rounded-md"
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                        <Github className="w-4 h-4 text-gray-400" />
 
-                      </div>
+                        <span>
+                          Code Repository
+                        </span>
 
-                      {/* =========================
-                          GITHUB LINK
-                      ========================== */}
-                      <div className="flex items-center space-x-4 pt-2 border-t border-gray-800/40">
-
-                        <a
-                          href={project.githubLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center space-x-1.5 text-xs text-gray-300 hover:text-white transition-colors"
-                        >
-
-                          <Github className="w-4 h-4 text-gray-400" />
-
-                          <span>
-                            Code Repository
-                          </span>
-
-                        </a>
-
-                      </div>
+                      </a>
 
                     </div>
 
                   </div>
 
                 </div>
-              );
-            })}
 
-          </div>
-        )}
+              </div>
+            );
+          })}
+
+        </div>
 
       </div>
     </section>
