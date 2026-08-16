@@ -118,7 +118,7 @@ const Navbar: React.FC = () => {
             </div>
 
             <span>
-              Yoseph
+              Yosef Agimasie
               <span className="text-gradient font-extrabold">
                 .
               </span>

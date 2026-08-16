@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
               <Cpu className="w-4 h-4 text-white" />
             </div>
             <span className="text-gray-100 font-bold text-lg">
-              Yoseph<span className="text-gradient">.</span>
+              Yosef Agimasie<span className="text-gradient">.</span>
             </span>
             <span className="text-xs text-gray-500 border-l border-gray-800 pl-2">
               Electrical & Computer Engineer(Computer focus)
@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
 
           {/* Copyright */}
           <div className="text-sm text-gray-500 text-center order-3 md:order-2">
-            &copy; {currentYear} Yoseph. All rights reserved.
+            &copy; {currentYear} Yosef. All rights reserved.
           </div>
 
           {/* Social Links */}
