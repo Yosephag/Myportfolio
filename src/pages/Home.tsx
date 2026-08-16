@@ -23,15 +23,15 @@ const Home: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-dark-bg text-gray-100 selection:bg-brand-blue/30 selection:text-white">
-      {/* Navigation */}
+      {/* Navbar */}
       <Navbar />
 
-      {/* Hero Section */}
+      {/* Hero */}
       <Hero
         onContactClick={() => scrollToSection("contact")}
       />
 
-      {/* Main Portfolio Sections */}
+      {/* Main Content */}
       <main className="relative z-10">
         <About />
         <Skills />
